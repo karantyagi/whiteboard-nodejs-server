@@ -1,6 +1,10 @@
 var express = require('express')
-var app = express()
+var app = express();
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/web-dev-db');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var session = require('express-session')
 app.use(session({
@@ -49,6 +53,11 @@ app.get('/api/session/get',
     getSessionAll);
 app.get('/api/session/reset',
     resetSession);
+
+var userService = require('./services/user.service.server');
+userService(app);
+
+require('./services/section.service.server')(app);
 
 
 app.listen(4000);
