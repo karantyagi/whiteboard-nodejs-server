@@ -1,10 +1,13 @@
 var express = require('express')
-var app = express();
+var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/web-dev-db');
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+
+var app = express()
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var session = require('express-session')
 app.use(session({
