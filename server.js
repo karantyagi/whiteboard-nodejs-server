@@ -58,6 +58,7 @@ function resetSession(req, res) {
 }
 
 
+
 // Register several HTTP endpoints to test session
 
 app.get('/api/session/set/:name/:value',
@@ -66,8 +67,8 @@ app.get('/api/session/get/:name',
     getSession);
 app.get('/api/session/get',
     getSessionAll);
-app.get('/api/session/reset',
-    resetSession);
+// app.get('/api/session/reset',
+//     resetSession);
 
 var userService = require('./services/user.service.server');
 userService(app);
