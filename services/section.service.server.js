@@ -3,7 +3,7 @@ module.exports = function (app) {
     app.post('/api/course/:courseId/section', createSection);
     app.get('/api/course/:courseId/section', findSectionsForCourse);
     app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
-    // app.get('/api/student/section', findSectionsForStudent);
+    app.get('/api/student/section', findSectionsForStudent);
 
     var sectionModel = require('../models/section/section.model.server');
     var enrollmentModel = require('../models/enrollment/enrollment.model.server');
@@ -29,7 +29,7 @@ module.exports = function (app) {
             student: studentId,
             section: sectionId
         };
-        
+
         // console.log('Enroll', enrollment);
         // // res.json(enrollment);
         // enrollmentModel.enrollStudentInSection(enrollment)

@@ -26,7 +26,7 @@ module.exports = function (app) {
 
     function logout(req, res) {
         req.session.destroy();
-        res.send(200);
+        res.sendStatus(200);
     }
 
     function findUserById(req, res) {
