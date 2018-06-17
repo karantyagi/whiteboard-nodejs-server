@@ -3,21 +3,25 @@ module.exports = function (app) {
     app.post('/api/course/:courseId/section', createSection);
     app.get('/api/course/:courseId/section', findSectionsForCourse);
     app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
-    app.get('/api/student/section', findSectionsForStudent);
+    // app.get('/api/student/section', findSectionsForStudent);
 
     var sectionModel = require('../models/section/section.model.server');
+    var enrollmentModel = require('../models/enrollment/enrollment.model.server');
 
     function findSectionsForStudent(req, res) {
         var currentUser = req.session.currentUser;
+        console.log('Session validation check, current user : ', currentUser);
         var studentId = currentUser._id;
         enrollmentModel
             .findSectionsForStudent(studentId)
             .then(function(enrollments) {
                 res.json(enrollments);
             });
+        console.log("Enrolled");
     }
 
     function enrollStudentInSection(req, res) {
+        console.log('ok on server');
         var sectionId = req.params.sectionId;
         var currentUser = req.session.currentUser;
         var studentId = currentUser._id;
@@ -25,16 +29,22 @@ module.exports = function (app) {
             student: studentId,
             section: sectionId
         };
-
-        sectionModel
-            .decrementSectionSeats(sectionId)
-            .then(function () {
-                return enrollmentModel
-                    .enrollStudentInSection(enrollment)
-            })
-            .then(function (enrollment) {
+        console.log('Enroll', enrollment);
+        // res.json(enrollment);
+        enrollmentModel.enrollStudentInSection(studentId,sectionId)
+            .then(function(enrollment) {
                 res.json(enrollment);
             })
+
+        // sectionModel
+        //     .decrementSectionSeats(sectionId)
+        //     .then(function () {
+        //         return enrollmentModel
+        //             .enrollStudentInSection(enrollment)
+        //     })
+        //     .then(function (enrollment) {
+        //         res.json(enrollment);
+        //     })
     }
 
     function findSectionsForCourse(req, res) {
