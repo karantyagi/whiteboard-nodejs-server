@@ -29,22 +29,23 @@ module.exports = function (app) {
             student: studentId,
             section: sectionId
         };
-        console.log('Enroll', enrollment);
-        // res.json(enrollment);
-        enrollmentModel.enrollStudentInSection(studentId,sectionId)
-            .then(function(enrollment) {
-                res.json(enrollment);
-            })
-
-        // sectionModel
-        //     .decrementSectionSeats(sectionId)
-        //     .then(function () {
-        //         return enrollmentModel
-        //             .enrollStudentInSection(enrollment)
-        //     })
-        //     .then(function (enrollment) {
+        
+        // console.log('Enroll', enrollment);
+        // // res.json(enrollment);
+        // enrollmentModel.enrollStudentInSection(enrollment)
+        //     .then(function(enrollment) {
         //         res.json(enrollment);
         //     })
+
+        sectionModel
+            .decrementSectionSeats(sectionId)
+            .then(function () {
+                return enrollmentModel
+                    .enrollStudentInSection(enrollment)
+            })
+            .then(function (enrollment) {
+                res.json(enrollment);
+            })
     }
 
     function findSectionsForCourse(req, res) {
