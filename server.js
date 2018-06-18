@@ -30,7 +30,7 @@ app.use(session({
 
 
 app.get('/', function (req, res) {
-    res.send('Hello World from express server !')
+    res.send('node.js server for White-Board App !')
 })
 
 

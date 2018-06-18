@@ -13,7 +13,7 @@ module.exports = function (app) {
     var userModel = require('../models/user/user.model.server');
 
     function login(req, res) {
-        console.log('here');
+        // console.log('in login');
         var credentials = req.body;
 
         userModel
@@ -55,7 +55,15 @@ module.exports = function (app) {
     }
 
     function profile(req, res) {
-        res.send(req.session['currentUser']);
+        console.log(req.session);
+        if(req.session['currentUser'] != null) {
+            res.send(req.session['currentUser']);
+        } else { res.send(
+            {
+                'username' : 'No session maintained'
+            });}
+
+
     }
 
     function createUser(req, res) {

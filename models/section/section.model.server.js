@@ -26,9 +26,20 @@ function incrementSectionSeats(sectionId) {
   });
 }
 
+function deleteSection(sectionId) {
+    return sectionModel.remove({_id: sectionId});
+}
+
+function updateSection(sectionId, newSection) {
+    return sectionModel.update({_id: sectionId},
+        {$set: newSection})
+}
+
 module.exports = {
-  createSection: createSection,
-  findSectionsForCourse: findSectionsForCourse,
-  decrementSectionSeats: decrementSectionSeats,
-  incrementSectionSeats: incrementSectionSeats
+    createSection: createSection,
+    findSectionsForCourse: findSectionsForCourse,
+    decrementSectionSeats: decrementSectionSeats,
+    incrementSectionSeats: incrementSectionSeats,
+    deleteSection: deleteSection,
+    updateSection: updateSection
 };
