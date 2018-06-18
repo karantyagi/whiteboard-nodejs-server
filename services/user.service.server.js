@@ -15,7 +15,6 @@ module.exports = function (app) {
     function login(req, res) {
         // console.log('in login');
         var credentials = req.body;
-
         userModel
             .findUserByCredentials(credentials)
             .then(function(user) {
@@ -89,8 +88,9 @@ module.exports = function (app) {
     }
 
     function updateUser(req, res) {
+        var userId = req.params['userId'];
         var user = req.body;
-        userModel.updateUser(user)
+        userModel.updateUser(userId, user)
             .then(function (user) {
                 res.send(user);
             })
