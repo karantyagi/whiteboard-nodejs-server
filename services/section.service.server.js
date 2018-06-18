@@ -71,14 +71,18 @@ module.exports = function (app) {
     function deleteSection(req, res) {
         var id = req.params['sectionId'];
         sectionModel.deleteSection(id)
-            .then(findSectionsForCourse);
+            .then(function (section) {
+                res.send(section);
+            });
     }
 
     function updateSection(req, res) {
-        var user = req.body;
-        sectionModel.updateSection(section)
+        var sectionId = req.params['sectionId'];
+        var section = req.body;
+        console.log('Section body : ', section);
+        sectionModel.updateSection(sectionId, section)
             .then(function (section) {
                 res.send(section);
-            })
+            });
     }
 };
