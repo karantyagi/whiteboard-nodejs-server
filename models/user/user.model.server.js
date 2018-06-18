@@ -7,11 +7,12 @@ function findUserById(userId) {
 }
 
 function findUserByUsername(username) {
+    console.log('last  ....', username);
     return userModel.findOne({username: username});
 }
 
 function findUserByCredentials(credentials) {
-    return userModel.findOne(credentials, {username: 1});
+    return userModel.findOne(credentials, {username: 1, password: 1});
 }
 
 function createUser(user) {
