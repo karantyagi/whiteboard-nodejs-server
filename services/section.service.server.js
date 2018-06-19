@@ -3,7 +3,10 @@ module.exports = function (app) {
     app.post('/api/course/:courseId/section', createSection);
     app.get('/api/course/:courseId/section', findSectionsForCourse);
     app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
+    app.delete('/api/section/:sectionId/enrollment', unEnrollStudentInSection);
     app.get('/api/student/section', findSectionsForStudent);
+    app.get('/api/student/:studentId/section/:sectionId', findEnrollmentByCredentials);
+
     app.delete('/api/section/:sectionId', deleteSection);
     app.put('/api/section/:sectionId', updateSection);
 
@@ -23,7 +26,7 @@ module.exports = function (app) {
     }
 
     function enrollStudentInSection(req, res) {
-        console.log('ok on server');
+        // console.log('ok on server');
         var sectionId = req.params.sectionId;
         var currentUser = req.session.currentUser;
         var studentId = currentUser._id;
@@ -47,6 +50,45 @@ module.exports = function (app) {
             })
             .then(function (enrollment) {
                 res.json(enrollment);
+            })
+    }
+
+    function unEnrollStudentInSection(req, res) {
+        console.log('Un-enroll from server');
+        var sectionId = req.params.sectionId;
+        var currentUser = req.session.currentUser;
+        var studentId = currentUser._id;
+        var enrollment = {
+            student: studentId,
+            section: sectionId
+        };
+        console.log('Now find Enrollment id for this student,section,' +
+            ' then use that enrollment id to delete that enrollment and increment seats');
+        console.log('Search for this enrollment - credentials : ', enrollment);
+
+
+        // sectionModel
+        //     .incrementSectionSeats(sectionId)
+        //     .then(function () {
+        //         return enrollmentModel
+        //             .unEnrollStudentInSection(enrollmentId)
+        //     })
+        //     .then(function (enrollment) {
+        //         res.json(enrollment);
+        //     })
+    }
+
+    function findEnrollmentByCredentials(req, res) {
+        var section = req.params['sectionId'];
+        var student = req.params['studentId'];
+        const credentials = {
+            student: student,
+            section: section
+        };
+        console.log(student, section);
+        enrollmentModel.findEnrollmentByCredentials(student, section)
+            .then(function (user) {
+                res.json(user);
             })
     }
 
