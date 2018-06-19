@@ -58,7 +58,9 @@ module.exports = function (app) {
         var sectionId = req.params.sectionId;
         enrollmentModel
             .unEnrollAllStudentsForSection(sectionId)
-            .then()
+            .then(function (enrollment) {
+                res.json(enrollment);
+            })
         // console.log('Un-enroll from server');
     }
 
