@@ -85,8 +85,8 @@ module.exports = function (app) {
             student: student,
             section: section
         };
-        console.log(student, section);
-        enrollmentModel.findEnrollmentByCredentials(student, section)
+        console.log(credentials);
+        enrollmentModel.findEnrollmentByCredentials(credentials)
             .then(function (user) {
                 res.json(user);
             })
