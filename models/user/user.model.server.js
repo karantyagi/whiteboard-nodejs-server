@@ -7,7 +7,6 @@ function findUserById(userId) {
 }
 
 function findUserByUsername(username) {
-    console.log('last  ....', username);
     return userModel.findOne({username: username});
 }
 

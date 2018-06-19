@@ -1,7 +1,7 @@
 module.exports = function (app) {
     app.get('/api/user', findAllUsers);
     app.get('/api/user/:userId', findUserById);
-    app.get('/api/user/:username', findUserByUsername);
+    app.get('/api/user/username/:username', findUserByUsername);
     app.get('/api/user/:username/:password', findUserByCredentials);
     app.delete('/api/user/:userId', deleteUser);
     app.put('/api/user/:userId', updateUser);
@@ -38,6 +38,7 @@ module.exports = function (app) {
 
     function findUserByUsername(req, res) {
         var username = req.params['username'];
+        // console.log('Username at server : ',username);
         userModel.findUserByUsername(username)
             .then(function (user) {
                 res.json(user);

@@ -4,6 +4,7 @@ module.exports = function (app) {
     app.get('/api/course/:courseId/section', findSectionsForCourse);
     app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
     app.delete('/api/section/:sectionId/enrollment/:enrollmentId', unEnrollStudentFromSection);
+    app.delete('/api/section/:sectionId/enrollment', unEnrollAllStudentsForSection);
     app.get('/api/student/section', findSectionsForStudent);
     app.get('/api/student/:studentId/section/:sectionId', findEnrollmentByCredentials);
 
@@ -51,6 +52,14 @@ module.exports = function (app) {
             .then(function (enrollment) {
                 res.json(enrollment);
             })
+    }
+
+    function unEnrollAllStudentsForSection(req, res) {
+        var sectionId = req.params.sectionId;
+        enrollmentModel
+            .unEnrollAllStudentsForSection(sectionId)
+            .then()
+        // console.log('Un-enroll from server');
     }
 
     function unEnrollStudentFromSection(req, res) {
