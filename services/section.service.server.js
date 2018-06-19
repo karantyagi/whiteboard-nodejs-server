@@ -3,7 +3,7 @@ module.exports = function (app) {
     app.post('/api/course/:courseId/section', createSection);
     app.get('/api/course/:courseId/section', findSectionsForCourse);
     app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
-    app.delete('/api/section/:sectionId/enrollment', unEnrollStudentInSection);
+    app.delete('/api/student/:studentId/section/:sectionId', unEnrollStudentFromSection);
     app.get('/api/student/section', findSectionsForStudent);
     app.get('/api/student/:studentId/section/:sectionId', findEnrollmentByCredentials);
 
@@ -53,7 +53,7 @@ module.exports = function (app) {
             })
     }
 
-    function unEnrollStudentInSection(req, res) {
+    function unEnrollStudentFromSection(req, res) {
         console.log('Un-enroll from server');
         var sectionId = req.params.sectionId;
         var currentUser = req.session.currentUser;
