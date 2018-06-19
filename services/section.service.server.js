@@ -3,7 +3,7 @@ module.exports = function (app) {
     app.post('/api/course/:courseId/section', createSection);
     app.get('/api/course/:courseId/section', findSectionsForCourse);
     app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
-    app.delete('/api/student/:studentId/section/:sectionId', unEnrollStudentFromSection);
+    app.delete('/api/section/:sectionId/enrollment/:enrollmentId', unEnrollStudentFromSection);
     app.get('/api/student/section', findSectionsForStudent);
     app.get('/api/student/:studentId/section/:sectionId', findEnrollmentByCredentials);
 
@@ -54,28 +54,26 @@ module.exports = function (app) {
     }
 
     function unEnrollStudentFromSection(req, res) {
-        console.log('Un-enroll from server');
+        // console.log('Un-enroll from server');
+        var enrollmentId = req.params.enrollmentId;
         var sectionId = req.params.sectionId;
-        var currentUser = req.session.currentUser;
-        var studentId = currentUser._id;
-        var enrollment = {
-            student: studentId,
-            section: sectionId
-        };
-        console.log('Now find Enrollment id for this student,section,' +
-            ' then use that enrollment id to delete that enrollment and increment seats');
-        console.log('Search for this enrollment - credentials : ', enrollment);
-
-
-        // sectionModel
-        //     .incrementSectionSeats(sectionId)
-        //     .then(function () {
-        //         return enrollmentModel
-        //             .unEnrollStudentInSection(enrollmentId)
-        //     })
-        //     .then(function (enrollment) {
-        //         res.json(enrollment);
-        //     })
+        // var currentUser = req.session.currentUser;
+        // var studentId = currentUser._id;
+        // var enrollment = {
+        //     student: studentId,
+        //     section: sectionId
+        // };
+        // console.log('Use enrollment id to delete that enrollment and increment seats');
+        // console.log('Enrollment Id : ', enrollmentId);
+        sectionModel
+            .incrementSectionSeats(sectionId)
+            .then(function () {
+                return enrollmentModel
+                    .unEnrollStudentInSection(enrollmentId)
+            })
+            .then(function (enrollment) {
+                res.json(enrollment);
+            })
     }
 
     function findEnrollmentByCredentials(req, res) {
