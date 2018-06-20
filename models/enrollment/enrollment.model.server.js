@@ -14,7 +14,8 @@ function unEnrollStudentInSection(enrollmentId) {
 }
 
 function unEnrollAllStudentsForSection(sectionId) {
-    return enrollmentModel.remove({sectionId: sectionId});
+    console.log('\n\n ===== Deleting all enrollment for a section : ' ,sectionId );
+    return enrollmentModel.remove({section: sectionId});
 }
 
 function findSectionsForStudent(studentId) {
