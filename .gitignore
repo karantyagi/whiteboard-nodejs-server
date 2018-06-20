@@ -12,7 +12,10 @@ desktop.ini
 *.ipr
 .idea/*
 
-
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
 
 # expo
 .expo/
