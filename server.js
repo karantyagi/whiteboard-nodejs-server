@@ -72,12 +72,13 @@ app.get('/api/session/get',
 // app.get('/api/session/reset',
 //     resetSession);
 
-var userService = require('./services/user.service.server');
-userService(app);
+
 var sectionService = require('./services/section.service.server');
 sectionService(app);
+var userService = require('./services/user.service.server');
+userService(app);
 
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 4000);
+app.listen(process.env.PORT);
 // app.listen(4000);
