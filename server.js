@@ -63,19 +63,20 @@ function resetSession(req, res) {
 
 // Register several HTTP endpoints to test session
 
-app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/session/set/:name/:value',
+app.get('/api/session/set/:name/:value',
     setSession);
-app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/session/get/:name',
+app.get('/api/session/get/:name',
     getSession);
-app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/session/get',
+app.get('/api/session/get',
     getSessionAll);
 // app.get('/api/session/reset',
 //     resetSession);
 
 var userService = require('./services/user.service.server');
 userService(app);
+var sectionService = require('./services/section.service.server');
+sectionService(app);
 
-require('./services/section.service.server')(app);
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 4000);

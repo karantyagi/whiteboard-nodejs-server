@@ -1,14 +1,14 @@
 module.exports = function (app) {
 
-    app.post('https://kt-whiteboard-nodejs-server.herokuapp.com/api/course/:courseId/section', createSection);
-    app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/course/:courseId/section', findSectionsForCourse);
-    app.post('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/:sectionId/enrollment', enrollStudentInSection);
-    app.delete('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/:sectionId/enrollment/:enrollmentId', unEnrollStudentFromSection);
-    app.delete('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/:sectionId/enrollment', unEnrollAllStudentsForSection);
-    app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/student/section', findSectionsForStudent);
-    app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/student/:studentId/section/:sectionId', findEnrollmentByCredentials);
-    app.delete('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/:sectionId', deleteSection);
-    app.put('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/:sectionId', updateSection);
+    app.post('/api/course/:courseId/section', createSection);
+    app.get('/api/course/:courseId/section', findSectionsForCourse);
+    app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
+    app.delete('/api/section/:sectionId/enrollment/:enrollmentId', unEnrollStudentFromSection);
+    app.delete('/api/section/:sectionId/enrollment', unEnrollAllStudentsForSection);
+    app.get('/api/student/section', findSectionsForStudent);
+    app.get('/api/student/:studentId/section/:sectionId', findEnrollmentByCredentials);
+    app.delete('/api/section/:sectionId', deleteSection);
+    app.put('/api/section/:sectionId', updateSection);
 
     var sectionModel = require('../models/section/section.model.server');
     var enrollmentModel = require('../models/enrollment/enrollment.model.server');
