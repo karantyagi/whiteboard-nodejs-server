@@ -75,6 +75,7 @@ app.get('/api/session/get',
 
 var sectionService = require('./services/section.service.server');
 sectionService(app);
+
 var userService = require('./services/user.service.server');
 userService(app);
 
