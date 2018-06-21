@@ -1,14 +1,14 @@
 module.exports = function (app) {
-    app.get('/api/user', findAllUsers);
-    app.get('/api/user/:userId', findUserById);
-    app.get('/api/user/username/:username', findUserByUsername);
-    app.get('/api/user/:username/:password', findUserByCredentials);
-    app.delete('/api/user/:userId', deleteUser);
-    app.put('/api/user/:userId', updateUser);
-    app.post('/api/user', createUser);
-    app.get('/api/profile', profile);
-    app.post('/api/logout', logout);
-    app.post('/api/login', login);
+    app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user', findAllUsers);
+    app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/:userId', findUserById);
+    app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/username/:username', findUserByUsername);
+    app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/:username/:password', findUserByCredentials);
+    app.delete('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/:userId', deleteUser);
+    app.put('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/:userId', updateUser);
+    app.post('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user', createUser);
+    app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/profile', profile);
+    app.post('https://kt-whiteboard-nodejs-server.herokuapp.com/api/logout', logout);
+    app.post('https://kt-whiteboard-nodejs-server.herokuapp.com/api/login', login);
 
     var userModel = require('../models/user/user.model.server');
 

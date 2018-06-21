@@ -63,11 +63,11 @@ function resetSession(req, res) {
 
 // Register several HTTP endpoints to test session
 
-app.get('/api/session/set/:name/:value',
+app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/session/set/:name/:value',
     setSession);
-app.get('/api/session/get/:name',
+app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/session/get/:name',
     getSession);
-app.get('/api/session/get',
+app.get('https://kt-whiteboard-nodejs-server.herokuapp.com/api/session/get',
     getSessionAll);
 // app.get('/api/session/reset',
 //     resetSession);
